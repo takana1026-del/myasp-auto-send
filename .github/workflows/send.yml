@@ -1,0 +1,26 @@
+name: MyASP メルマガ自動配信
+
+on:
+  schedule:
+    - cron: '0 20 * * *'  # 毎日 JST 05:00（UTC 20:00）
+  workflow_dispatch:       # 手動実行ボタンも使える
+
+jobs:
+  send-myasp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: MyASP 配信実行
+        env:
+          NOTION_TOKEN:        ${{ secrets.NOTION_TOKEN }}
+          NOTION_MYASP_DB_ID:  ${{ secrets.NOTION_MYASP_DB_ID }}
+          MYASP_ADDRESS:       ${{ secrets.MYASP_ADDRESS }}
+          GMAIL_USER:          ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD:  ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: python send_myasp.py
