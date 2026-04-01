@@ -74,7 +74,7 @@ def get_body(page_id):
 
 def send_email(subject, body):
     """Gmail SMTP 経由で MyASP 入稿先アドレスへ送信"""
-    msg = MIMEText(body, 'plain', 'utf-8')
+    msg = MIMEText(body, 'html', 'utf-8')
     msg['Subject'] = subject
     msg['From']    = GMAIL_USER
     msg['To']      = MYASP_ADDRESS
