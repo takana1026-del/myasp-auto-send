@@ -69,7 +69,7 @@ def get_body(page_id):
             texts = block['bulleted_list_item']['rich_text']
             line = '・' + ''.join(t['plain_text'] for t in texts)
             lines.append(line)
-    return '\n'.join(lines)
+    return '<br>\n'.join(lines)
 
 
 def send_email(subject, body):
