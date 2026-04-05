@@ -64,10 +64,12 @@ def get_body(page_id):
         if btype in ('paragraph', 'heading_1', 'heading_2', 'heading_3'):
             texts = block[btype]['rich_text']
             line = ''.join(t['plain_text'] for t in texts)
+            line = line.replace('\n', '<br>\n')
             lines.append(line)
         elif btype == 'bulleted_list_item':
             texts = block['bulleted_list_item']['rich_text']
             line = '・' + ''.join(t['plain_text'] for t in texts)
+            line = line.replace('\n', '<br>\n')
             lines.append(line)
     return '<br>\n'.join(lines)
 
